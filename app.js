@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var restAPIRouter = require('./routes/restAPI');
 
 const sendEmail = require("./config/sendmail");
 
@@ -37,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/restAPI', restAPIRouter);
+
 app.post('/email', async(req, res)=>{
 try{
   console.log("Sending mail ...");
