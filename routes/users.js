@@ -5,9 +5,13 @@ var userCtl = require('../controllers/users');
 router.get('/',userCtl.getAllUsers);
 /* GET users listing. */
 router.get('/:id',userCtl.getUser);
-/* GET user listing. */
+/* GET user listing. 
+:3000/users/add
+*/
 router.post('/add',userCtl.addUser);
-/* GET multiple users listing. */
+/* GET multiple users listing. 
+:3000/users/addMany
+*/
 router.post('/addMany',userCtl.addMultipleUser);
 
 /* GET users listing. */

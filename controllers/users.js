@@ -42,7 +42,7 @@ exports.getUser = (req, res, next) => {
       user.save().then(data => {
           return res.status(201).json({ success: true, msg: 'Successful created new User', data:data });  //creation successfull
         }).catch(err => {
-          return res.status(403).json({ err: err });
+          return res.status(403).json({ success: false, err: err });
         });
     }
     
