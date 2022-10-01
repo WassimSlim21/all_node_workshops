@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var passport = require('passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -17,12 +18,15 @@ var app = express();
 /* CORS Setup*/
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  //  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', '*');
   
-   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  //  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', '*');
   
   next();
 });
+
 require('dotenv').config();
 
 
@@ -34,6 +38,7 @@ mongoose.connect(process.env.DB, { promiseLibrary: require('bluebird') })
 
 );
 
+app.use(passport.initialize());
 
 
 
@@ -50,6 +55,7 @@ app.locals.basedir = path.join(__dirname, 'public');
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/products', productsrouter);
 
 app.post('/email', async(req, res)=>{
 try{

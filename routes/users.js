@@ -15,9 +15,12 @@ router.post('/add',userCtl.addUser);
 router.post('/addMany',userCtl.addMultipleUser);
 
 /* GET users listing. */
-router.put('/update/:id',userCtl.updateUserRole);
+router.put('/update/:id',userCtl.updateUser);
 // /* GET users listing. */
-// router.delete('/remove/:userId/:name',userCtl.deleteUser);
+router.delete('/removeMany/:userName',userCtl.deleteManyUsers);
+router.delete('/remove/:id',userCtl.deleteUser);
+
 // router.delete('/remove',userCtl.deleteUserByReqQueryParams);
+router.post('/login', userCtl.login );
 
 module.exports = router;

@@ -32,7 +32,8 @@ var UserSchema = new Schema({
         type: String,
         enum: ['admin', 'super-admin'],
         default: 'admin'
-    },
+    }
+
 });
 
 UserSchema.pre('save', function (next) {

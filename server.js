@@ -8,7 +8,7 @@ const app = require('./app');
 const http = require('http');
 var debug = require('debug')('expressapp:server');
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
 
 
@@ -40,14 +40,20 @@ app.set('port', port);
  */
 
  var server = http.createServer(app);
-
+ const { Server } = require("socket.io");
+ const io = new Server(server);
+ 
+ io.on('connection', (socket) => {
+  console.log('a user connected');
+});
+ 
  /**
   * Listen on provided port, on all network interfaces.
   */
 
 
  server.listen(port, ()=>{
-    console.log('listening on :3000');
+    console.log('listening on :3002');
  });
  server.on('error', onError);
  server.on('listening', onListening);
@@ -92,5 +98,3 @@ app.set('port', port);
     debug('Listening on ' + bind);
   }
   
-
-  console.log(process.env.EMAIL)
