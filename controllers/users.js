@@ -40,7 +40,7 @@ exports.login = (req, res,next) => {
               userName: user.userName,
               _id : user._id
             } 
-            res.json({success: true, token: 'JWT ' + token ,user: responseUser});
+            res.status(200).json({success: true, token: 'JWT ' + token ,user: responseUser});
           } else {
             res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
           }
@@ -79,7 +79,7 @@ exports.addUser = (req, res, next) => {
     user.save().then(data => {
         return res.status(201).json({ success: true, msg: 'Successful created new User', data: data });  //creation successfull
     }).catch(err => {
-        return res.status(403).json({ success: false, err: err });
+        return res.status(400).json({ success: false, err: err });
     });
 }
 
@@ -107,7 +107,6 @@ exports.addMultipleUser = (req, res, next) => {
 }
 
 exports.getAllUsers = (req, res, next) => {
-    +-
     User.find().populate('pack').then(users => {
         res.send(users);
     }).catch(err => {
